@@ -1,0 +1,9 @@
+<h1>Subjects#new</h1>
+<p>Find me in app/views/subjects/new.html.erb</p>
+
+<%= simple_form_for Subject.new, :url => subjects_path do |f| %>
+  <%= f.input :name %>
+  <%= f.input :description %>
+  <br>
+  <%= f.button :submit %>
+<% end %>

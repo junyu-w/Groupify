@@ -1,0 +1,11 @@
+<h1>Discussions#new</h1>
+<p>Find me in app/views/discussions/new.html.erb</p>
+<%= simple_form_for Discussion.new, :url => subject_group_post_discussions_path(@subject, @group, @post) do |f| %>
+  <div>
+    <%= f.input :content %>
+  </div>
+  <br>
+  <p>
+    <%= f.button :submit %>
+  </p>
+<% end %>

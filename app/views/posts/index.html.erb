@@ -1,0 +1,69 @@
+<h1>Posts#index</h1>
+<p>Find me in app/views/posts/index.html.erb</p>
+<strong>
+  Group:
+</strong>
+<%= @group.name %>
+<br>
+<strong>
+  Topic:
+</strong>
+<%= @topic.title %>
+<br>
+<%= @topic.content %>
+<br>
+<strong><em>
+  Instructor Answer:
+</em></strong>
+<h4><em>
+  <% if @instructor_answer %>
+    <%= @instructor_answer.content %>
+    <em>
+      &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp-------------------------<%= User.find(@instructor_answer.user_id).name %>[Instructor]
+    </em>
+  <% end %>
+</em></h4>
+<% if current_user.is_instructor == true %>
+  <% if @group.instructor_answer_id == nil %>
+    <%= simple_form_for InstructorAnswer.new, :url => subject_group_instructor_answers_path(@subject, @group) do |f| %>
+      <div>
+        <%= f.input :content %>
+      </div>
+      <br>
+      <p>
+        <%= f.button :submit %>
+      </p>
+    <% end %>
+  <% end %>
+<% end %>
+
+<% @posts.each do |p| %>
+  <p>
+    <h3>
+      <%= p.summary %>
+    </h3>
+    <%= p.content %>
+    <br>
+    <em>
+      &nbsp&nbsp&nbsp&nbsp&nbsp--- post by <b><%= User.find(p.user_id).name %></b>
+    </em>
+    <%= link_to "Reply", new_subject_group_post_discussion_path(@subject, @group, p) %>
+    <% @dis = Discussion.where(post_id: p.id) %>
+    <h5>Replies: </h5>
+    <% @dis.each do |d| %>
+      <%= d.content %>
+      <div>-------------------<div>
+    <% end %>
+  </p>
+<% end %>
+
+<%= simple_form_for Post.new, :url => subject_group_posts_path(@subject, @group) do |f| %>
+  <div>
+    <%= f.input :summary %>
+    <%= f.input :content %>
+  </div>
+  <br>
+  <p>
+    <%= f.button :submit %>
+  </p>
+<% end %>

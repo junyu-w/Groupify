@@ -1,0 +1,18 @@
+<h1>Subjects#index</h1>
+<p>Find me in app/views/subjects/index.html.erb</p>
+<% @subjects.each do |s| %>
+  <h3>
+    <% if !current_user or (!(s.instructor_list.include? current_user.id) and !(s.student_list.include? current_user.id)) %>
+      <%= link_to s.name, subject_path(s.id) %>
+    <% else %>
+      <%= link_to s.name, subject_groups_path(s.id) %>
+    <% end %>
+  </h3>
+<% end %>
+<p>
+  <% if current_user != nil %>
+    <% if current_user.is_instructor == true %>
+      <%= link_to "Create", new_subject_path %>
+    <% end %>
+  <% end %>
+</p>

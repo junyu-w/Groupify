@@ -28,6 +28,7 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
     arel (5.0.1.20140414130214)
+    awesome_print (1.6.1)
     bcrypt (3.1.9)
     better_errors (2.1.0)
       coderay (>= 1.0.0)
@@ -150,6 +151,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  awesome_print
   better_errors
   binding_of_caller
   bootstrap-sass

@@ -18,6 +18,16 @@
       <%= f.label :password_confirmation %>
       <%= f.password_field :password_confirmation, class: 'form-control' %>
     </div>
-     <%= f.submit 'Sign up', :class => 'button right' %>
+    <div class="checkbox">
+      <label>
+        <%= f.check_box :is_instructor%> Instructor
+      </label>
+    </div>
+    <div class="checkbox">
+      <label>
+        <%= f.check_box :is_student%> Student
+      </label>
+    </div>
+    <%= f.submit 'Sign up', :class => 'button right' %>
   <% end %>
 </div>

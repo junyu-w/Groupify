@@ -1,0 +1,12 @@
+<h1>Groups#new</h1>
+<p>Find me in app/views/groups/new.html.erb</p>
+<%= simple_form_for Group.new, :url => subject_groups_path do |f| %>
+  <div>
+    <%= f.input :name %>
+    <%= f.collection_select :topic_id, Topic.where(subject_id: @subject.id), :id, :title %>
+  </div>
+  <br>
+  <p>
+    <%= f.button :submit %>
+  </p>
+<% end %>

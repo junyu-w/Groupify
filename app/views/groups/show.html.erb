@@ -1,0 +1,21 @@
+<h1>Groups#show</h1>
+<p>Find me in app/views/groups/show.html.erb</p>
+<%= @group.name %>
+<br>
+<%= @topic.title %>
+<br>
+<%= @topic.content %>
+<br>
+
+<% if current_user.is_instructor == false %>
+  <% if !(@group.student_list.include? current_user.id) %>
+    <%= link_to "Join", subject_group_path(@subject, @group), :method => :patch %>
+  <% end %>
+<% else %>
+  <%= link_to "Watch", subject_group_posts_path(@subject, @group) %>
+  <%= link_to "Delete", subject_group_path(@subject, @group), :method => :delete %>
+<% end %>
+
+
+
+

@@ -11,15 +11,73 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150104233409) do
+ActiveRecord::Schema.define(version: 20150110081822) do
+
+  create_table "discussions", force: true do |t|
+    t.text     "content"
+    t.integer  "post_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "groups", force: true do |t|
+    t.text     "student_list"
+    t.string   "leader"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "subject_id"
+    t.string   "name"
+    t.integer  "topic_id"
+    t.integer  "instructor_answer_id"
+  end
+
+  create_table "instructor_answers", force: true do |t|
+    t.text     "content"
+    t.integer  "topic_id"
+    t.integer  "group_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
+
+  create_table "posts", force: true do |t|
+    t.text     "summary"
+    t.text     "content"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "group_id"
+  end
+
+  create_table "subjects", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.text     "instructor_list"
+    t.text     "student_list"
+    t.string   "current_instructor"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "active_status"
+  end
+
+  create_table "topics", force: true do |t|
+    t.string   "title"
+    t.text     "content"
+    t.integer  "subject_id"
+    t.integer  "instructor_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "group_id"
+  end
 
   create_table "users", force: true do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "email",                  default: "",    null: false
+    t.string   "encrypted_password",     default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -27,6 +85,9 @@ ActiveRecord::Schema.define(version: 20150104233409) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"
+    t.boolean  "is_instructor"
+    t.boolean  "is_student",             default: false
+    t.text     "subject_id_list"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

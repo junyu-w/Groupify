@@ -1,0 +1,8 @@
+<h1>Topics#new</h1>
+<p>Find me in app/views/topics/new.html.erb</p>
+<%= simple_form_for Topic.new, :url => subject_topics_path do |f| %>
+  <%= f.input :title %>
+  <%= f.input :content %>
+  <br>
+  <%= f.button :submit %>
+<% end %>

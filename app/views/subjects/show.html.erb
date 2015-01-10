@@ -1,0 +1,16 @@
+<h1>Subjects#show</h1>
+<p>Find me in app/views/subjects/show.html.erb</p>
+
+<p>
+  <%= @subject.name %>
+</p>
+<p>
+  <%= @subject.description %>
+</p>
+<p>
+  <% if current_user %>
+    <% if !(@subject.instructor_list.include? current_user.id) and !(@subject.student_list.include? current_user.id) %>
+      <%= link_to "Join", subject_path(@subject.id), :method => :patch %>
+    <% end %>
+  <% end %>
+</p>

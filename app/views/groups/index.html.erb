@@ -1,0 +1,33 @@
+<h1>Groups#index</h1>
+<p>Find me in app/views/groups/index.html.erb</p>
+<h3><strong>
+  Topics:
+</strong></h3>
+<p>
+  <% @topics.each do |t| %>
+    <div>
+      <%= t.title %>
+      <%= t.content %>
+    </div>
+  <% end %>
+</p>
+<h3><strong>
+  Groups:
+</strong></h3>
+<p>
+  <% @groups.each do |g| %>
+    <div>
+      <% if !(g.student_list.include? current_user.id) %>
+        <%=link_to g.name, subject_group_path(@subject, g) %>
+      <% else %>
+        <%= link_to g.name, subject_group_posts_path(@subject, g) %>
+      <% end %>
+    </div>
+  <% end %>
+</p>
+<% if current_user.is_instructor == true %>
+  <%= link_to "Create Group", new_subject_group_path(@subject) %>
+  <br>
+  <%= link_to "Create Topic", new_subject_topic_path(@subject) %>
+<% end %>
+
