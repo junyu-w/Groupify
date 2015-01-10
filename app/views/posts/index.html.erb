@@ -51,7 +51,7 @@
     <% @dis = Discussion.where(post_id: p.id) %>
     <h5>Replies: </h5>
     <% @dis.each do |d| %>
-      <%= d.content %>
+      <%= d.content %><span>-----------by <%= User.find(d.user_id).name %></span>
       <div>-------------------<div>
     <% end %>
   </p>
