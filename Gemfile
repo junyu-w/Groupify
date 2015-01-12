@@ -28,3 +28,4 @@ group :production do
   gem 'rails_12factor'
 end
 gem "awesome_print"
+gem 'paperclip', '~> 4.2.1'

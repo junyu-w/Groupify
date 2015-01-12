@@ -9,6 +9,10 @@ class PostsController < ApplicationController
   end
 
   def show
+    @subject = Subject.find(params[:subject_id])
+    @group = Group.find(params[:group_id])
+    @post = Post.find(params[:id])
+    @discussions = Discussion.where(post_id: @post.id)
   end
 
   def new
