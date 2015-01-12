@@ -18,10 +18,10 @@ class DiscussionsController < ApplicationController
     @new_discussion = Discussion.new(discussion_params)
     @new_discussion.update_attributes(:post_id => @post.id, :user_id => current_user.id)
     if @new_discussion.save
-      redirect_to subject_group_posts_path(@subject, @group, @post)
+      redirect_to subject_group_post_path(@subject, @group, @post)
     else
       flash[:error] = @new_discussion.errors.full_messages.to_sentence
-      redirect_to subject_group_posts_path(@subject, @group, @post)
+      redirect_to subject_group_post_path(@subject, @group, @post)
     end
   end
 

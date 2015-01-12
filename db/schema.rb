@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150110081822) do
+ActiveRecord::Schema.define(version: 20150112004402) do
 
   create_table "discussions", force: true do |t|
     t.text     "content"
@@ -88,6 +88,10 @@ ActiveRecord::Schema.define(version: 20150110081822) do
     t.boolean  "is_instructor"
     t.boolean  "is_student",             default: false
     t.text     "subject_id_list"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

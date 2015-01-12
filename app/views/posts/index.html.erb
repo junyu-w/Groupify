@@ -40,20 +40,10 @@
 <% @posts.each do |p| %>
   <p>
     <h3>
-      <%= p.summary %>
+      <%= link_to p.summary, subject_group_post_path(@subject, @group, p) %>
     </h3>
     <%= p.content %>
     <br>
-    <em>
-      &nbsp&nbsp&nbsp&nbsp&nbsp--- post by <b><%= User.find(p.user_id).name %></b>
-    </em>
-    <%= link_to "Reply", new_subject_group_post_discussion_path(@subject, @group, p) %>
-    <% @dis = Discussion.where(post_id: p.id) %>
-    <h5>Replies: </h5>
-    <% @dis.each do |d| %>
-      <%= d.content %><span>-----------by <%= User.find(d.user_id).name %></span>
-      <div>-------------------<div>
-    <% end %>
   </p>
 <% end %>
 
@@ -67,3 +57,5 @@
     <%= f.button :submit %>
   </p>
 <% end %>
+
+<%= link_to "Back", subject_groups_path(@subject) %>

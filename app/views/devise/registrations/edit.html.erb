@@ -31,6 +31,14 @@
         <%= f.password_field :current_password, class: 'form-control' %>
       </div>
     </fieldset>
+    <fieldset>
+      <strong>
+        Upload new photo.
+      </strong>
+      <div class="form-group">
+        <%= f.file_field :photo %>
+      </div>
+    </fieldset>
     <%= f.submit 'Update', :class => 'button right' %>
   <% end %>
 </div>

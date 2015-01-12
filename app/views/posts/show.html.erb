@@ -1,2 +1,25 @@
 <h1>Posts#show</h1>
 <p>Find me in app/views/posts/show.html.erb</p>
+<p class="lead">
+    <%= @post.summary %>
+    <%= @post.content %>
+    <small>
+      <em>
+        &nbsp&nbsp&nbsp&nbsp&nbsp--- post by <b><%= User.find(@post.user_id).name %></b>
+      </em>
+    </small>
+</p>
+<%= link_to "Reply", new_subject_group_post_discussion_path(@subject, @group, @post) %>
+<br>
+<strong>
+  Discussions:
+</strong>
+<br>
+<% @discussions.each do |d| %>
+ <p>
+   <%= d.content %><span>-----------by <%= User.find(d.user_id).name %></span>
+   <div>-------------------<div>
+ </p>
+<% end %>
+<%= link_to "Back", subject_group_posts_path(@subject, @group) %>
+
