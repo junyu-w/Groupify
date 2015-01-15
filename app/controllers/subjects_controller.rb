@@ -13,6 +13,7 @@ class SubjectsController < ApplicationController
   def create
     @new_subject = Subject.new(subject_params)
     @new_subject.instructor_list.push(current_user.id);
+    @new_subject.update_attributes(:active_status => true)
     if @new_subject.save
       current_user.subject_id_list.push(@new_subject.id)
       current_user.save
@@ -48,9 +49,25 @@ class SubjectsController < ApplicationController
   end
 
   def activate
+    @subject = Subject.find(params[:id])
+    @subject.update_attributes(:active_status => true)
+    if @subject.save
+      redirect_to subject_groups_path(@subject)
+    else
+      flash[:error] = @subject.errors.full_messages.to_sentence
+      redirect_to subject_groups_path(@subject)
+    end
   end
 
   def deactivate
+    @subject = Subject.find(params[:id])
+    @subject.update_attributes(:active_status => false)
+    if @subject.save
+      redirect_to subject_groups_path(@subject)
+    else
+      flash[:error] = @subject.errors.full_messages.to_sentence
+      redirect_to subject_groups_path(@subject)
+    end
   end
 
   private

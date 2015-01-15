@@ -1,8 +1,19 @@
 <h1>Groups#index</h1>
 <p>Find me in app/views/groups/index.html.erb</p>
+<% if current_user.is_instructor == true %>
+  <%= link_to "Activate", activate_subject_path(@subject) %>
+  <%= link_to "Deactivate", deactivate_subject_path(@subject) %>
+<% end %>
+
+<% if @subject.active_status == false %>
+  <p><b>This class has been made inactive by instructor</b></p>
+<% end %>
+
 <h3><strong>
   Topics:
 </strong></h3>
+
+
 <p>
   <% @topics.each do |t| %>
     <div>
@@ -25,11 +36,15 @@
     </div>
   <% end %>
 </p>
-<% if current_user.is_instructor == true %>
-  <%= link_to "Create Group", new_subject_group_path(@subject) %>
-  <br>
-  <%= link_to "Create Topic", new_subject_topic_path(@subject) %>
+<% if @subject.active_status == true %>
+  <% if current_user.is_instructor == true %>
+    <%= link_to "Create Group", new_subject_group_path(@subject) %>
+    <br>
+    <%= link_to "Create Topic", new_subject_topic_path(@subject) %>
+  <% end %>
 <% end %>
+
+
 
 <%= link_to "Back", subjects_path %>
 

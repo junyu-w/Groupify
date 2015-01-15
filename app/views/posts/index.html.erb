@@ -47,15 +47,18 @@
   </p>
 <% end %>
 
-<%= simple_form_for Post.new, :url => subject_group_posts_path(@subject, @group) do |f| %>
-  <div>
-    <%= f.input :summary %>
-    <%= f.input :content %>
-  </div>
-  <br>
-  <p>
-    <%= f.button :submit %>
-  </p>
+<% if @subject.active_status == true %>
+  <%= simple_form_for Post.new, :url => subject_group_posts_path(@subject, @group) do |f| %>
+    <div>
+      <%= f.input :summary %>
+      <%= f.input :content %>
+    </div>
+    <br>
+    <p>
+      <%= f.button :submit %>
+    </p>
+  <% end %>
 <% end %>
+
 
 <%= link_to "Back", subject_groups_path(@subject) %>

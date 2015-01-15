@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
   resources :subjects do |s|
+    member do
+      get :activate
+      get :deactivate
+    end
     resources :groups do |g|
       resources :instructor_answers
       resources :posts do |p|

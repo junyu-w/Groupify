@@ -9,7 +9,10 @@
       </em>
     </small>
 </p>
-<%= link_to "Reply", new_subject_group_post_discussion_path(@subject, @group, @post) %>
+<% if @subject.active_status == true %>
+  <%= link_to "Reply", new_subject_group_post_discussion_path(@subject, @group, @post) %>
+<% end %>
+
 <br>
 <strong>
   Discussions:
