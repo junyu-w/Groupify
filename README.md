@@ -1,5 +1,21 @@
+Groupify
+==========
+Still in development. Need desinger and front-end developer's help. Contact: junyuw@berkeley.edu
+
+Introduction
+-----------
+
+Groupify is a web platform for online education. Aiming to improve communication between students and instructors in middle schools and high schools.
+On Groupify, as an instructor, one can create courses, create topics within different courses, and create groups for students to join and discuss about certain topics assinged to different groups.
+As a student, one can join courses created by instructors and join groups which has the most interesting topics. And within the group, students can post questions or reply to other students' posts. ----created by Junyu Wang
+
+How to use
+-------------
+
+User can sign up via email and choose to be either instructor or student. Instructor has the ability to create courses, topics and groups. While students can join courses and groups, and discuss about certain topics.
+
 Rails Devise
-================
+-----------
 
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
@@ -8,43 +24,3 @@ provided by the [RailsApps Project](http://railsapps.github.io/).
 
 Rails Composer is open source and supported by subscribers. Please join RailsApps to support development of Rails Composer.
 
-Problems? Issues?
------------
-
-Need help? Ask on Stack Overflow with the tag 'railsapps.'
-
-Your application contains diagnostics in the README file. Please provide a copy of the README file when reporting any issues.
-
-If the application doesn't work as expected, please [report an issue](https://github.com/RailsApps/rails_apps_composer/issues)
-and include the diagnostics.
-
-Ruby on Rails
--------------
-
-This application requires:
-
-- Ruby 2.0.0
-- Rails 4.1.6
-
-Learn more about [Installing Rails](http://railsapps.github.io/installing-rails.html).
-
-Getting Started
----------------
-
-Documentation and Support
--------------------------
-
-Issues
--------------
-
-Similar Projects
-----------------
-
-Contributing
-------------
-
-Credits
--------
-
-License
--------
