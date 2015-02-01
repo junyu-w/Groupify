@@ -1,3 +1,67 @@
 // Place all the styles related to the Subjects controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+/*Toggle Styles */
+
+.course-panel-body {
+  text-align: center;
+}
+
+/* entire container, keeps perspective */
+.flip-container {
+	perspective: 1000;
+}
+
+/* flip the pane when hovered */
+.flip-container:hover .flipper, .flip-container.hover .flipper {
+		transform: rotateY(180deg);
+	}
+
+
+.flip-container, .front {
+	width: 100%;
+	min-height: 100px;
+        height:auto;
+        margin-top: 10px;
+        margin-bottom: 10px;
+}
+
+.flip-container, .back {
+	width: 100%;
+	min-height: 100px;
+        height:auto;
+        margin-bottom: 20px;
+}
+
+/* flip speed goes here */
+.flipper {
+	transition: 0.6s;
+	transform-style: preserve-3d;
+	position: relative;
+}
+
+/* hide back of pane during swap */
+.front, .back {
+	backface-visibility: hidden;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+/* front pane, placed above back */
+.front {
+	z-index: 2;
+	/* for firefox 31 */
+	transform: rotateY(0deg);
+}
+
+/* back, initially hidden pane */
+.back {
+	transform: rotateY(180deg);
+}
+
+
+
+
+

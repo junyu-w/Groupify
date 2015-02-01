@@ -1,18 +1,48 @@
-<h1>Subjects#index</h1>
-<p>Find me in app/views/subjects/index.html.erb</p>
-<% @subjects.each do |s| %>
-  <h3>
-    <% if !current_user or (!(s.instructor_list.include? current_user.id) and !(s.student_list.include? current_user.id)) %>
-      <%= link_to s.name, subject_path(s.id) %>
-    <% else %>
-      <%= link_to s.name, subject_groups_path(s.id) %>
-    <% end %>
-  </h3>
-<% end %>
-<p>
-  <% if current_user != nil %>
-    <% if current_user.is_instructor == true %>
-      <%= link_to "Create", new_subject_path %>
-    <% end %>
-  <% end %>
-</p>
+<!-- <h1>Subjects#index</h1> -->
+<!-- <p>Find me in app/views/subjects/index.html.erb</p> -->
+
+<ol class="breadcrumb">
+  <li><a href="#">Courses</a></li>
+</ol>
+
+
+<div class="container-fluid">
+    <div class="row">
+      <!-- course panel -->
+      <% @subjects.each do |s| %>
+      <div class="col-lg-12 course-panel-container">
+        <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+          <div class="flipper">
+            <div class="panel panel-primary course-panel front">
+              <div class="panel-body course-panel-body">
+                <%= s.name %>
+              </div>
+            </div>
+            <div class="panel panel-primary course-panel back">
+              <div class="panel-heading course-panel-heading">
+                <%= s.name %>
+              </div>
+              <div class="panel-body">
+                <p>
+                  <%= s.description %>
+                </p>
+                <% if current_user %>
+                  <% if !current_user or (!(s.instructor_list.include? current_user.id) and !(s.student_list.include? current_user.id)) %>
+                    <p><button class="btn btn-default">
+                      <%= link_to "Join", subject_path(s.id), :method => :patch %>
+                    </button></p>
+                  <% else %>
+                    <p><button class="btn btn-default">
+                      <%= link_to "Go", subject_groups_path(s.id) %>
+                    </button></p>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+
