@@ -1,50 +1,124 @@
-<h1>Groups#index</h1>
-<p>Find me in app/views/groups/index.html.erb</p>
-<% if current_user.is_instructor == true %>
-  <%= link_to "Activate", activate_subject_path(@subject) %>
-  <%= link_to "Deactivate", deactivate_subject_path(@subject) %>
-<% end %>
+<!--<h1>Groups#index</h1> -->
+<!-- <p>Find me in app/views/groups/index.html.erb</p> -->
+
+<ol class="breadcrumb">
+  <li><a href="#"><%=link_to "Courses", subjects_path %></a></li>
+  <li><a href="#"><%= @subject.name %></a></li>
+  <li class="active">Topics & Groups</li>
+</ol>
 
 <% if @subject.active_status == false %>
   <p><b>This class has been made inactive by instructor</b></p>
 <% end %>
 
-<h3><strong>
-  Topics:
-</strong></h3>
-
-
-<p>
-  <% @topics.each do |t| %>
-    <div>
-      <%= t.title %>
-      <%= t.content %>
-    </div>
-  <% end %>
-</p>
-<h3><strong>
-  Groups:
-</strong></h3>
-<p>
-  <% @groups.each do |g| %>
-    <div>
-      <% if !(g.student_list.include? current_user.id) %>
-        <%=link_to g.name, subject_group_path(@subject, g) %>
-      <% else %>
-        <%= link_to g.name, subject_group_posts_path(@subject, g) %>
+<% if current_user.is_instructor == true %>
+  <div class="dropdown">
+    <button class="btn btn-default dropdown-toggle" type="button" id="CourseActiondropdownMenu" data-toggle="dropdown" aria-expanded="true">
+      Actions
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+      <% if @subject.active_status == true %>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><%= link_to "Create Group", new_subject_group_path(@subject) %></a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><%= link_to "Create Topic", new_subject_topic_path(@subject) %></a></li>
+        <li role="presentation" class="divider"></li>
       <% end %>
-    </div>
-  <% end %>
-</p>
-<% if @subject.active_status == true %>
-  <% if current_user.is_instructor == true %>
-    <%= link_to "Create Group", new_subject_group_path(@subject) %>
-    <br>
-    <%= link_to "Create Topic", new_subject_topic_path(@subject) %>
-  <% end %>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><%= link_to "Activate", activate_subject_path(@subject) %></a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><%= link_to "Deactivate", deactivate_subject_path(@subject) %></a></li>
+    </ul>
+  </div>
 <% end %>
 
 
+<!--Group show modals -->
+<% @groups.each do |g| %>
+  <div class="modal fade group-modal" id="group-<%= g.id %>-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="group"+"<%= g.id %>"+"-modal-title"> <%= g.name %> <small><%= g.topic.title %></small></h4>
+        </div>
+        <div class="modal-body" id="group"+"<%= g.id %>"+"-modal-body">
+          <%= g.topic.content %>
+        </div>
+        <div class="modal-footer">
+          <% if current_user.is_instructor == true %>
+            <button class="btn btn-default">
+              <%= link_to "Watch", subject_group_posts_path(@subject, g) %>
+            </button>
+            <button class="btn btn-default">
+              <%= link_to "Delete", subject_group_path(@subject, g), :method => :delete %>
+            </button>
+          <% else %>
+            <% if !(@group.student_list.include? current_user.id) %>
+              <button class="btn btn-default">
+                <%= link_to "Join", subject_group_path(@subject, g), :method => :patch %>
+              </button>
+            <% else %>
+              <%= link_to "Go", subject_group_posts_path(@subject, g) %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
 
-<%= link_to "Back", subjects_path %>
+<!-- Topic Container -->
+<div id="topic-container" class="container-fluid">
+    <div class="row">
+      <div class="page-header">
+        <h1> Topics <small>for group discussion</small></h1>
+      </div>
+      <!-- Topic panel -->
+      <% @topics.each do |t| %>
+        <div class="col-lg-3 course-panel-container">
+          <div class="panel panel-primary course-panel hvr-buzz-out">
+            <div class="panel-heading course-panel-heading">
+              <%= t.title %>
+            </div>
+            <div class="panel-body">
+              <p>
+                <%= t.content %>
+              </p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <!-- Topic panel! -->
+    </div>
+</div>
+
+
+<!-- Group Container -->
+<div id="group-conatiner" class="container-fluid">
+    <div class="row">
+      <div class="page-header" id="group-header">
+        <h1> Groups <small>hover to show topic</small></h1>
+      </div>
+      <style>
+      .page-header {
+        margin-top: 20px;
+        text-align: center;
+      }
+      </style>
+      <!-- Group panel -->
+      <% @groups.each do |group| %>
+        <div class="col-lg-3 group-panel-container">
+          <div class="panel panel-primary group-panel hvr-bounce-to-right" data-toggle="tooltip" data-placement="top" title="<%= group.topic.title %>">
+            <a data-toggle="modal" data-target="#group-<%= group.id %>-modal" href="#">
+              <div class="panel-body group-panel-body">
+                <%= group.name %>
+              </div>
+            </a>
+          </div>
+        </div>
+      <% end %>
+    </div>
+</div>
+<!--Group container -->
+
+
+
 

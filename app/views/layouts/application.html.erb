@@ -12,9 +12,111 @@
     <header>
       <%= render 'layouts/navigation' %>
     </header>
-    <main role="main">
-       <%= render 'layouts/messages' %>
-       <%= yield %>
-    </main>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <div id="sidebar-wrapper">
+          <ul class="sidebar-nav">
+              <li>
+                  <%= link_to "All Courses", root_path %>
+              </li>
+              <% if current_user %>
+                <li>
+                    <a href="#">My Courses</a>
+                </li>
+                <li>
+                  <% if current_user.is_instructor == true %>
+                    <%= link_to "Create Course", new_subject_path %>
+                  <% end %>
+                </li>
+              <% end %>
+              <li>
+                  <a href="#" data-toggle="modal" data-target="#contactModal">Contact</a>
+              </li>
+              <li>
+                  <a href="#" data-toggle="modal" data-target="#aboutModal">About</a>
+              </li>
+          </ul>
+      </div>
+      <!-- sidebar -->
+      <!-- page content -->
+      <div class="page-content-wrapper">
+
+        <!-- contact and about modal -->
+        <div id="contactModal" class="modal fade" aria-hidden="true" tabindex="-1">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 id="contactModalTitle" class="modal-title">Contact</h4>
+              </div>
+              <div class="modal-body" id="contact-modal-body">
+                Email: junyuw@berkeley.edu<br>
+                Location: Berkeley, CA
+              </div>
+              <style>
+              #contact-modal-body {
+                text-align: center
+              }
+              .modal-title {
+                text-align: center
+              }
+              </style>
+            </div>
+          </div>
+        </div>
+        <div id="aboutModal" class="modal fade" aria-hidden="true" tabindex="-1">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 id="aboutModalTitle" class="modal-title">About</h4>
+              </div>
+              <div class="modal-body" id="about-modal-body">
+                Lorem ipsum dolor sit amet luctus nulla sodales imperdiet eget in placerat montes a at. Sed sem maecenas. Est pellentesque suscipit urna mollitia interdum. Condimentum turpis velit. At suspendisse sit. Ullamcorper semper quis. Class suspendisse curabitur dui id purus. Aliquet mi semper. Venenatis consequat in donec hendrerit pulvinar molestie at sed. Donec est turpis nunc imperdiet tempora. Et vivamus nonummy gravida porttitor pellentesque. Morbi duis et nulla in in egestas.
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- contact and about modal -->
+        
+        <main role="main">
+        <style>
+        main {
+          margin-top: 0px;
+          background: #F8F8F8
+        }
+        </style>
+           <%= render 'layouts/messages' %>
+           <%= yield %>
+        </main>
+      </div>
+      <!-- page content -->
+    </div>
+    <!-- wrapper -->
+
+    <!-- Menu Toggle Script -->
+    <script>
+    //toggle menu when clicked
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+
+    //adjust heights of course-panel when flipped
+    $(".course-panel-container").mouseenter(function(e) {
+        var heightOfContent = $(this).children().children().children('div.back').height() + 20;
+        this.setAttribute("style", "min-height:"+heightOfContent+"px");
+    });
+    
+    $(".course-panel-container").mouseleave(function(e) {
+        this.setAttribute("style", "min-height:100px");
+    });
+
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+
+    </script>
+    
   </body>
 </html>
