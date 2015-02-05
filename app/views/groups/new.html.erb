@@ -1,12 +1,28 @@
-<h1>Groups#new</h1>
-<p>Find me in app/views/groups/new.html.erb</p>
+<!-- <h1>Groups#new</h1> -->
+<!-- <p>Find me in app/views/groups/new.html.erb</p> -->
+
 <%= simple_form_for Group.new, :url => subject_groups_path do |f| %>
-  <div>
-    <%= f.input :name %>
-    <%= f.collection_select :topic_id, Topic.where(subject_id: @subject.id), :id, :title %>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-9">
+        <form>
+          <div class="form-group">
+            <label class="create-form" for="group-title-input">Group Name</label>
+            <%= f.input :name, placeholder: "Enter group name here", label: false %>
+          </div>
+          <div class="form-group">
+            <label class="create-form" for="group-topic-choice">Available Topics</label>
+            <br>
+            <%= f.collection_select :topic_id, Topic.where(subject_id: @subject.id).where(group_id: nil), :id, :title %>
+          </div>
+        </form>
+        <%= f.button :submit %>
+        <%= link_to "Cancel", subject_groups_path(@subject), {:class=>"btn btn-warning"} %>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
   </div>
-  <br>
-  <p>
-    <%= f.button :submit %>
-  </p>
 <% end %>
+
+

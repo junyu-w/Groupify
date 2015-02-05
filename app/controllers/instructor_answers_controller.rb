@@ -19,7 +19,7 @@ class InstructorAnswersController < ApplicationController
       redirect_to subject_group_posts_path(@subject, @group)
     else
       flash[:error] = @new_instructor_answer.errors.full_messages.to_sentence
-      redirect_to subject_group_posts_path(@subjects, @group)
+      redirect_to subject_group_posts_path(@subject, @group)
     end
   end
 

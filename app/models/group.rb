@@ -1,8 +1,10 @@
 class Group < ActiveRecord::Base
   serialize :student_list,Array
-  has_one :topic
+
+  has_one:topic
   has_many :posts
   has_one :instructor_answer
+  belongs_to :Subject
 
   validates :name, presence: true, length: 
     { 

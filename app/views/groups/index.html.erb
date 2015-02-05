@@ -44,19 +44,17 @@
         </div>
         <div class="modal-footer">
           <% if current_user.is_instructor == true %>
-            <button class="btn btn-default">
-              <%= link_to "Watch", subject_group_posts_path(@subject, g) %>
-            </button>
-            <button class="btn btn-default">
-              <%= link_to "Delete", subject_group_path(@subject, g), :method => :delete %>
-            </button>
-          <% else %>
-            <% if !(@group.student_list.include? current_user.id) %>
-              <button class="btn btn-default">
-                <%= link_to "Join", subject_group_path(@subject, g), :method => :patch %>
+              <%= link_to "Watch", subject_group_posts_path(@subject, g), {:class => "btn btn-default"} %>
+              <button class="btn btn-warning">
+                <%= link_to "Delete", subject_group_path(@subject, g), :method => :delete %>
               </button>
+          <% else %>
+            <% if !(g.student_list.include? current_user.id) %>
+                <button class="btn btn-default">
+                  <%= link_to "Join", subject_group_path(@subject, g), :method => :patch %>
+                </button>
             <% else %>
-              <%= link_to "Go", subject_group_posts_path(@subject, g) %>
+              <%= link_to "Go", subject_group_posts_path(@subject, g), {:class => "btn btn-primary"} %>
             <% end %>
           <% end %>
         </div>
