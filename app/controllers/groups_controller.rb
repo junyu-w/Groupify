@@ -19,7 +19,7 @@ class GroupsController < ApplicationController
       flash[:error] = "Please create topics first"
       redirect_to subject_groups_path(@subject)
     end
-    if @subject.topics.length == @subject.groups.length
+    if @subject.topics.length != 0 and @subject.topics.length == @subject.groups.length
       flash[:error] = "Please create more topics"
       redirect_to subject_groups_path(@subject)
     end

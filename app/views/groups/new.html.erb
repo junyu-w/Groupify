@@ -8,11 +8,11 @@
       <div class="col-md-9">
         <form>
           <div class="form-group">
-            <label for="group-title-input">Group Name</label>
+            <label class="create-form" for="group-title-input">Group Name</label>
             <%= f.input :name, placeholder: "Enter group name here", label: false %>
           </div>
           <div class="form-group">
-            <label for="group-topic-choice">Available Topics</label>
+            <label class="create-form" for="group-topic-choice">Available Topics</label>
             <br>
             <%= f.collection_select :topic_id, Topic.where(subject_id: @subject.id).where(group_id: nil), :id, :title %>
           </div>

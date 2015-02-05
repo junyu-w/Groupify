@@ -1,9 +1,25 @@
-<h1>Subjects#new</h1>
-<p>Find me in app/views/subjects/new.html.erb</p>
+<!-- <h1>Subjects#new</h1> -->
+<!-- <p>Find me in app/views/subjects/new.html.erb</p> -->
 
 <%= simple_form_for Subject.new, :url => subjects_path do |f| %>
-  <%= f.input :name %>
-  <%= f.input :description %>
-  <br>
-  <%= f.button :submit %>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-9">
+        <form>
+          <div class="form-group">
+            <label class="create-form" for="course-title-input">Course Name</label>
+            <%= f.input :name, placeholder:"Enter course name here", label: false %>
+            <label class="create-form" for="course-description-intput">Course Description</label>
+            <%= f.input :description, placeholder:"Enter course description here", label: false %>
+          </div>
+        </form>
+        <%= f.button :submit %>
+        <%= link_to "Cancel", :back, {:class => "btn btn-warning"} %>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+  </div>
 <% end %>
+
+
