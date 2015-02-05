@@ -15,8 +15,12 @@ class GroupsController < ApplicationController
 
   def new
     @subject = Subject.find(params[:subject_id])
-    if Topic.where(subject_id: @subject.id).length == 0
+    if @subject.topics.length == 0
       flash[:error] = "Please create topics first"
+      redirect_to subject_groups_path(@subject)
+    end
+    if @subject.topics.length == @subject.groups.length
+      flash[:error] = "Please create more topics"
       redirect_to subject_groups_path(@subject)
     end
   end
