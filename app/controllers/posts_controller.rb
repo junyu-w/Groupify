@@ -24,10 +24,10 @@ class PostsController < ApplicationController
     @new_post = Post.new(post_params)
     @new_post.update_attributes(:group_id => @group.id, :user_id => current_user.id)
     if @new_post.save
-      redirect_to subject_group_posts_path(@subject, @group)
+      redirect_to subject_group_post_path(@subject, @group, @new_post)
     else
       flash[:error] = @new_post.errors.full_messages.to_sentence
-      redirect_to subject_group_posts_path(@subject, @group)
+      redirect_to subject_group_post_path(@subject, @group)
     end
   end
 
