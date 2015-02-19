@@ -2,6 +2,10 @@ Groupify
 ==========
 Still in development. Need desinger and front-end developer's help. Contact: junyuw@berkeley.edu
 
+Things To Do
+---
+Integrate with Groupify Front-end Repo, add more features like email verification, searching etc.
+
 Introduction
 -----------
 
