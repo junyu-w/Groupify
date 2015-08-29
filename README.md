@@ -28,3 +28,6 @@ provided by the [RailsApps Project](http://railsapps.github.io/).
 
 Rails Composer is open source and supported by subscribers. Please join RailsApps to support development of Rails Composer.
 
+Codeship
+---------
+push to run codeship test
